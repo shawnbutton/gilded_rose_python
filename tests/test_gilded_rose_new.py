@@ -103,3 +103,11 @@ class TestGildedRose:
         assert items[0].quality == 0
         gilded_rose.update_quality()
         assert items[0].quality == 0
+
+    # def test_conjured_items_decrease_in_quality_twice_as_fast(self):
+    #     items = makeItemList("Conjured Mana Cake", 3, 10)
+    #     gilded_rose = GildedRose(items)
+    #     gilded_rose.update_quality()
+    #
+    #     assert items[0].quality == 8
+
