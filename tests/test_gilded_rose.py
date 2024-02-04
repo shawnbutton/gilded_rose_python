@@ -1,11 +1,11 @@
 import pytest
 
 from gilded_rose_python.gilded_rose import GildedRose
-from gilded_rose_python.item import Item
+from gilded_rose_python.item_factory import ItemFactory
 
 
 def makeItemList(name, sell_in, quality):
-    return [Item.create_item(name, sell_in, quality)]
+    return [ItemFactory.create_item(name, sell_in, quality)]
 
 
 class TestGildedRose:

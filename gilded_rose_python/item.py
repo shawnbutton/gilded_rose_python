@@ -2,19 +2,11 @@ LEGENDARY = "Sulfuras, Hand of Ragnaros"
 CONCERT_TICKETS = "Backstage passes to a TAFKAL80ETC concert"
 BRIE = "Aged Brie"
 
-
 class Item:
     def __init__(self, name, sell_in, quality):
         self.name = name
         self.sell_in = sell_in
         self.quality = quality
-
-    @staticmethod
-    def create_item(name, sell_in, quality):
-        if name == LEGENDARY:
-            return Legendary(name, sell_in, quality)
-        else:
-            return Item(name, sell_in, quality)
 
     def age(self):
         if self.is_cheese():
@@ -63,11 +55,3 @@ class Item:
 
     def lower_quality(self):
         self.quality = self.quality - 1
-
-
-class Legendary(Item):
-    def __init__(self, name, sell_in, quality):
-        super().__init__(name, sell_in, quality)
-
-    def age(self):
-        pass
