@@ -5,7 +5,7 @@ from gilded_rose_python.item import Item
 
 
 def makeItemList(name, sell_in, quality):
-    return [Item(name, sell_in, quality)]
+    return [Item.create_item(name, sell_in, quality)]
 
 
 class TestGildedRose:

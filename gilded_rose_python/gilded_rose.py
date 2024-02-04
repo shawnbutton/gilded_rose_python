@@ -6,6 +6,6 @@ class GildedRose(object):
 
     def update_quality(self):
         for item in self.items:
-            item.process_item()
+            item.age()
 
 
