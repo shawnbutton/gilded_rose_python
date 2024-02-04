@@ -10,31 +10,39 @@ class GildedRose(object):
 
     def update_quality(self):
         for item in self.items:
-            if self.is_cheese(item) or self.is_tickets(item):
+            self.process_item(item)
+
+    def process_item(self, item):
+        if self.is_legendary(item):
+            pass
+        elif self.is_cheese(item):
+            self.raise_quality(item)
+            self.lower_sellin(item)
+            if self.not_expired(item):
                 self.raise_quality(item)
-                if self.is_tickets(item):
-                    if item.sell_in < 11:
-                        self.raise_quality(item)
-                    if item.sell_in < 6:
-                        self.raise_quality(item)
-            else:
-                if item.quality > 0:
-                    if self.is_legendary(item):
-                        continue
-                    self.lower_quality(item)
-            if not self.is_legendary(item):
-                self.lower_sellin(item)
-            if item.sell_in < 0:
-                if self.is_cheese(item):
+        else:
+            if self.is_tickets(item):
+                self.raise_quality(item)
+                if item.sell_in < 11:
                     self.raise_quality(item)
+                if item.sell_in < 6:
+                    self.raise_quality(item)
+            else:
+                if self.not_worthless(item):
+                    self.lower_quality(item)
+            self.lower_sellin(item)
+            if self.not_expired(item):
+                if self.is_tickets(item):
+                    item.quality = 0
                 else:
-                    if self.is_tickets(item):
-                        item.quality = 0
-                    else:
-                        if item.quality > 0:
-                            if self.is_legendary(item):
-                                continue
-                            self.lower_quality(item)
+                    if self.not_worthless(item):
+                        self.lower_quality(item)
+
+    def not_expired(self, item):
+        return item.sell_in < 0
+
+    def not_worthless(self, item):
+        return item.quality > 0
 
     def is_legendary(self, item):
         return item.name == SULFURAS
