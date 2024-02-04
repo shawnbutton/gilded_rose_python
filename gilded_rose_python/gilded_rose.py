@@ -20,23 +20,22 @@ class GildedRose(object):
             self.lower_sellin(item)
             if self.not_expired(item):
                 self.raise_quality(item)
-        else:
-            if self.is_tickets(item):
+        elif self.is_tickets(item):
+            self.raise_quality(item)
+            if item.sell_in < 11:
                 self.raise_quality(item)
-                if item.sell_in < 11:
-                    self.raise_quality(item)
-                if item.sell_in < 6:
-                    self.raise_quality(item)
-            else:
-                if self.not_worthless(item):
-                    self.lower_quality(item)
+            if item.sell_in < 6:
+                self.raise_quality(item)
             self.lower_sellin(item)
             if self.not_expired(item):
-                if self.is_tickets(item):
-                    item.quality = 0
-                else:
-                    if self.not_worthless(item):
-                        self.lower_quality(item)
+                item.quality = 0
+        else:
+            if self.not_worthless(item):
+                self.lower_quality(item)
+            self.lower_sellin(item)
+            if self.not_expired(item):
+                if self.not_worthless(item):
+                    self.lower_quality(item)
 
     def not_expired(self, item):
         return item.sell_in < 0
