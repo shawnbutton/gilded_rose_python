@@ -65,6 +65,11 @@ To run the tests you need to install dependencies with [poetry](https://python-p
 
 run:
 ```bash
-pytest tests
+poetry install
+```
+
+Then to run tests:
+```bash
+poetry run pytest tests
 ```
 
