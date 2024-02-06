@@ -21,7 +21,7 @@ def process_item(item: Item):
     if is_brie(item):
         raise_quality(item)
         lower_sell_in(item)
-        if item.sell_in < 0:
+        if is_expired(item):
             raise_quality(item)
     elif is_sulfuras(item):
         pass
@@ -32,13 +32,17 @@ def process_item(item: Item):
         if item.sell_in < 6:
             raise_quality(item)
         lower_sell_in(item)
-        if item.sell_in < 0:
+        if is_expired(item):
             item.quality = 0
     else:
         lower_quality(item)
         lower_sell_in(item)
-        if item.sell_in < 0:
+        if is_expired(item):
             lower_quality(item)
+
+
+def is_expired(item):
+    return item.sell_in < 0
 
 
 def lower_sell_in(item):
