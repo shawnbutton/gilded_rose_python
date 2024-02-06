@@ -58,8 +58,8 @@ We have provided two types of tests that you can run which should provide enough
 tests/test_gilded_rose.py <-- characterization tests for gilded_rose. Reverse-engineered from the code. Provides some safety,
 but we can't guarentee they provide full coverage.
 
-test/approval.test.js <-- a "golden master" or "approval" test. Tries to cover all possible scenerios, and validates that the
-results are the same.
+test/test_snapshot.py <-- a "golden master" or "approval" test. Tries to cover all possible scenarios, and validates that the
+results match an accepted master.
 
 To run the tests you need to install dependencies with [poetry](https://python-poetry.org/)
 
