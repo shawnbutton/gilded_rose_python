@@ -23,28 +23,22 @@ def process_item(item: Item):
         lower_sell_in(item)
         if item.sell_in < 0:
             raise_quality(item)
-    else:
-        if is_tickets(item):
+    elif is_sulfuras(item):
+        pass
+    elif is_tickets(item):
+        raise_quality(item)
+        if item.sell_in < 11:
             raise_quality(item)
-            if item.sell_in < 11:
-                raise_quality(item)
-            if item.sell_in < 6:
-                raise_quality(item)
-        else:
-            if is_sulfuras(item):
-                return
-            lower_quality(item)
-        if is_sulfuras(item):
-            pass
-        else:
-            lower_sell_in(item)
+        if item.sell_in < 6:
+            raise_quality(item)
+        lower_sell_in(item)
         if item.sell_in < 0:
-            if is_tickets(item):
-                item.quality = 0
-            else:
-                if is_sulfuras(item):
-                    return
-                lower_quality(item)
+            item.quality = 0
+    else:
+        lower_quality(item)
+        lower_sell_in(item)
+        if item.sell_in < 0:
+            lower_quality(item)
 
 
 def lower_sell_in(item):
