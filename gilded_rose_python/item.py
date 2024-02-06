@@ -18,15 +18,6 @@ class Item:
     def is_expired(self):
         return self.sell_in < 0
 
-    def is_legendary(self):
-        return self.name == LEGENDARY
-
-    def is_tickets(self):
-        return self.name == CONCERT_TICKETS
-
-    def is_cheese(self):
-        return self.name == BRIE
-
     def lower_sellin(self):
         self.sell_in = self.sell_in - 1
 
@@ -34,9 +25,6 @@ class Item:
         if self.quality < 50:
             self.quality = self.quality + 1
 
-    def not_worthless(self):
-        return self.quality > 0
-
     def lower_quality(self):
-        if self.not_worthless():
+        if self.quality > 0:
             self.quality = self.quality - 1
