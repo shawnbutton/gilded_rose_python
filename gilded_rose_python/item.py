@@ -2,6 +2,7 @@ LEGENDARY = "Sulfuras, Hand of Ragnaros"
 CONCERT_TICKETS = "Backstage passes to a TAFKAL80ETC concert"
 BRIE = "Aged Brie"
 
+
 class Item:
     def __init__(self, name, sell_in, quality):
         self.name = name
@@ -9,33 +10,13 @@ class Item:
         self.quality = quality
 
     def age(self):
-        if self.is_cheese():
-            self.raise_quality()
-            self.lower_sellin()
-            if self.not_expired():
-                self.raise_quality()
-        elif self.is_tickets():
-            self.raise_quality()
-            if self.sell_in < 11:
-                self.raise_quality()
-            if self.sell_in < 6:
-                self.raise_quality()
-            self.lower_sellin()
-            if self.not_expired():
-                self.quality = 0
-        else:
-            if self.not_worthless():
-                self.lower_quality()
-            self.lower_sellin()
-            if self.not_expired():
-                if self.not_worthless():
-                    self.lower_quality()
+        self.lower_quality()
+        self.lower_sellin()
+        if self.is_expired():
+            self.lower_quality()
 
-    def not_expired(self):
+    def is_expired(self):
         return self.sell_in < 0
-
-    def not_worthless(self):
-        return self.quality > 0
 
     def is_legendary(self):
         return self.name == LEGENDARY
@@ -53,5 +34,9 @@ class Item:
         if self.quality < 50:
             self.quality = self.quality + 1
 
+    def not_worthless(self):
+        return self.quality > 0
+
     def lower_quality(self):
-        self.quality = self.quality - 1
+        if self.not_worthless():
+            self.quality = self.quality - 1
