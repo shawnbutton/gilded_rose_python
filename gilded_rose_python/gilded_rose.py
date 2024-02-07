@@ -2,6 +2,7 @@ class GildedRose(object):
 
     def __init__(self, items):
         self.items = items
+        self._temp = 999
 
     def update_quality(self):
         for item in self.items:

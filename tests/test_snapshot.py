@@ -13,14 +13,14 @@ ITEM_NAMES = [
 
 def test_gilded_rose_with_snapshot(snapshot):
     items = create_items()
+    gilded_rose = GildedRose(items)
 
     snapshot_text = ''
 
-    gilded_rose = GildedRose(items)
     for runs in range(0, 4):
         snapshot_text += 'Run ' + str(runs) + '\n'
         gilded_rose.update_quality()
-        snapshot_text += items_into_str(items)
+        snapshot_text += items_into_str(gilded_rose.items)
 
     snapshot.snapshot_dir = str(pathlib.Path(__file__).parent.resolve()) + '/snapshots'
     snapshot.assert_match(snapshot_text, 'snapshot.txt')
