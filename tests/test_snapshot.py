@@ -1,4 +1,5 @@
 import pathlib
+from itertools import product
 
 from gilded_rose_python.gilded_rose import GildedRose
 from gilded_rose_python.item import Item
@@ -40,3 +41,7 @@ def create_items():
             for quality in range(-1, 55):
                 items.append(Item(name, sell_in, quality))
     return items
+
+    # functional way of doing the above
+    # combinations = product(ITEM_NAMES, range(-1, 20), range(-1, 55))
+    # return [Item(item[0], item[1], item[2]) for item in combinations]
